@@ -1,0 +1,23 @@
+{
+  "created": "2026-02-02T00:21:43+05:30",
+  "topics": {
+    "dsa": {
+      "name": "DSA Practice",
+      "total_checkins": 0,
+      "streak": 0,
+      "history": []
+    },
+    "leet": {
+      "name": "leet",
+      "total_checkins": 0,
+      "streak": 0,
+      "history": []
+    },
+    "products": {
+      "name": "Product Work",
+      "total_checkins": 0,
+      "streak": 0,
+      "history": []
+    }
+  }
+}
