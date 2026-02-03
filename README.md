@@ -83,11 +83,6 @@ att
 Example output:
 
 ```
-┌─────────────────────────────────────────────────┐
-│           AT - Activity Tracker                 │
-│              March 15, 2024                     │
-└─────────────────────────────────────────────────┘
-
 💻 DSA Practice          [██░░░] 2/3  🔥 5 days
 📚 Daily Reading         [███░░] 1/1  🔥 12 days
 💪 Exercise              [░░░░░] 0/1
@@ -169,29 +164,6 @@ att c backend "Created REST API endpoints"
 att c testing "Added unit tests for auth module"
 ```
 
-## 🔧 Configuration Files
-
-### Config Location
-
-`~/.att_config.json`
-
-```json
-{
-  "data_path": "/Users/you/.att",
-  "git_enabled": true,
-  "git_remote": "git@github.com:yourusername/att-data.git"
-}
-```
-
-### Data Directory Structure
-
-```
-~/.att/
-├── topics.json          # Topic definitions
-├── checkins.json        # All check-in records
-└── .git/               # Git repository (if enabled)
-```
-
 ## 🎨 Emoji Ideas
 
 | Category     | Emojis            |
@@ -229,6 +201,15 @@ go build -o att .
 ```bash
 go test ./...
 ```
+
+### TODOs
+
+-[] Improve config and git sync
+-[] Improve viewing of trackings
+-[] Improve data storage from json file to efficient alternative.
+-[] New commands to view graphs
+-[] Structure app for better Development
+-[] add custom styling and layouts
 
 ### Contributing
 
