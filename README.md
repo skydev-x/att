@@ -1,8 +1,6 @@
-# at
+# at 🎯
 
 Accidentally Doing Hundred Different-things (ADHD) Tracker; aka `at`
-
-# AT - Activity Tracker 🎯
 
 > A simple, Git-backed progress tracker for your daily goals. Track habits, monitor streaks, and stay accountable—all from your terminal.
 

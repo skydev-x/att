@@ -114,6 +114,8 @@ type Dashboard struct {
 }
 
 func main() {
+
+	VERSION := "v1.0.0"
 	if len(os.Args) == 1 {
 		showDashboard()
 		return
@@ -136,6 +138,8 @@ func main() {
 		runSetup()
 	case "help", "--help", "-h":
 		showHelp()
+	case "version", "--version", "-v":
+		fmt.Println(VERSION)
 	default:
 		fmt.Printf("Unknown command: %s\n", command)
 		fmt.Println("Run 'at help' for usage")
