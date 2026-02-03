@@ -1,6 +1,6 @@
-# at 🎯
+# att 🎯
 
-Accidentally Doing Hundred Different-things (ADHD) Tracker; aka `at`
+Accidentally Doing Hundred Different-things (ADHD) Tracker Tool; aka `att`
 
 > A simple, Git-backed progress tracker for your daily goals. Track habits, monitor streaks, and stay accountable—all from your terminal.
 
@@ -10,7 +10,7 @@ Accidentally Doing Hundred Different-things (ADHD) Tracker; aka `at`
 
 - 📊 **Visual Dashboard** - See your daily progress at a glance
 - 🔥 **Streak Tracking** - Monitor consecutive days of activity
-- 📝 **Simple Check-ins** - Quick logging with `at checkin`
+- 📝 **Simple Check-ins** - Quick logging with `att checkin`
 - 🎯 **Custom Goals** - Set daily targets for each activity
 - 🔄 **Git-Backed** - Automatic version control of your progress
 - 🚀 **Fast & Lightweight** - Built with Go, runs anywhere
@@ -98,12 +98,12 @@ Example output:
 
 ### Core Commands
 
-| Command                       | Description                          |
-| ----------------------------- | ------------------------------------ |
-| `at`                          | Show dashboard with today's progress |
-| `at checkin <topic> <remark>` | Log an activity                      |
-| `at c <topic> <remark>`       | Shorthand for checkin                |
-| `at help`                     | Show detailed help                   |
+| Command                        | Description                          |
+| ------------------------------ | ------------------------------------ |
+| `att`                          | Show dashboard with today's progress |
+| `att checkin <topic> <remark>` | Log an activity                      |
+| `att c <topic> <remark>`       | Shorthand for checkin                |
+| `att help`                     | Show detailed help                   |
 
 ### Topic Management
 
@@ -173,11 +173,11 @@ att c testing "Added unit tests for auth module"
 
 ### Config Location
 
-`~/.at_config.json`
+`~/.att_config.json`
 
 ```json
 {
-  "data_path": "/Users/you/.at",
+  "data_path": "/Users/you/.att",
   "git_enabled": true,
   "git_remote": "git@github.com:yourusername/att-data.git"
 }
@@ -209,7 +209,7 @@ Keep your progress synced across multiple devices:
 ```bash
 # 1. Create a private GitHub repo for your data
 # 2. Set the remote
-att config set-remote git@github.com:yourusername/at-data.git
+att config set-remote git@github.com:yourusername/att-data.git
 
 # Your check-ins will auto-commit and push!
 ```
