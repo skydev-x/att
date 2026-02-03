@@ -3,9 +3,9 @@
 set -e
 
 # Configuration - UPDATE THESE
-APP_NAME="at"           # What users will type to run it
+APP_NAME="att"           # What users will type to run it
 GITHUB_USER="skydev-x"   # Your GitHub username
-GITHUB_REPO="at"       # Your repo name
+GITHUB_REPO="att"       # Your repo name
 INSTALL_DIR="/usr/local/bin"
 
 # Colors
