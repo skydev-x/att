@@ -3,7 +3,7 @@
 set -e
 
 # Configuration - UPDATE THESE
-APP_NAME="Accidentally Doing Hundred Different-things (ADHD) Tracker"           # What users will type to run it
+APP_NAME="at"           # What users will type to run it
 GITHUB_USER="skydev-x"   # Your GitHub username
 GITHUB_REPO="at"       # Your repo name
 INSTALL_DIR="/usr/local/bin"
