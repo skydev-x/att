@@ -1066,7 +1066,6 @@ FILES:
   Config:  ~/.at_config.json
   Data:    ~/.at/ (or custom path)
 
-For more info, visit: https://github.com/yourusername/at
-`
+For more info, visit: (https://github.com/skydev-x/at)`
 	fmt.Println(help)
 }
