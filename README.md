@@ -82,6 +82,9 @@ att
 
 Example output:
 
+<img width="1626" height="1340" alt="Image" src="https://github.com/user-attachments/assets/372e68b4-3ff7-4a3d-a035-d44ea19ca51b" />
+<img width="918" height="520" alt="Image" src="https://github.com/user-attachments/assets/e700df90-8a6c-4ce9-8fce-82d1eba507e8" />
+
 ```
 💻 DSA Practice          [██░░░] 2/3  🔥 5 days
 📚 Daily Reading         [███░░] 1/1  🔥 12 days
