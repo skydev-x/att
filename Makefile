@@ -1,7 +1,7 @@
 # Makefile for your TUI app
 
-APP_NAME := at
-VERSION := 1.0.0
+APP_NAME := att
+VERSION := 1.0.1
 BUILD_DIR := build
 
 # Go parameters

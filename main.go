@@ -115,7 +115,7 @@ type Dashboard struct {
 
 func main() {
 
-	VERSION := "v1.0.0"
+	VERSION := "v1.0.1"
 	if len(os.Args) == 1 {
 		showDashboard()
 		return
