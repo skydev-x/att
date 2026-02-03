@@ -1070,4 +1070,3 @@ For more info, visit: https://github.com/yourusername/at
 `
 	fmt.Println(help)
 }
-
