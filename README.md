@@ -21,7 +21,7 @@ Accidentally Doing Hundred Different-things (ADHD) Tracker; aka `at`
 ### Quick Install (macOS & Linux)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/skydev-x/at/master/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/skydev-x/att/master/install.sh | bash
 ```
 
 ### Manual Installation
@@ -29,16 +29,16 @@ curl -fsSL https://raw.githubusercontent.com/skydev-x/at/master/install.sh | bas
 **Prerequisites:** Go 1.20+
 
 ```bash
-git clone https://github.com/skydev-x/at.git
-cd at
-go build -o at .
-sudo mv at /usr/local/bin/
+git clone https://github.com/skydev-x/att.git
+cd att
+go build -o att .
+sudo mv att /usr/local/bin/
 ```
 
 ### Verify Installation
 
 ```bash
-at --version
+att --version
 ```
 
 ## 🎯 Quick Start
@@ -46,7 +46,7 @@ at --version
 ### 1. Run Setup Wizard
 
 ```bash
-at setup
+att setup
 ```
 
 This will guide you through:
@@ -59,25 +59,25 @@ This will guide you through:
 
 ```bash
 # Add topics with: ID, goal description, daily target, and emoji
-at topic add dsa "DSA Practice" 3 "💻"
-at topic add reading "Daily Reading" 1 "📚"
-at topic add workout "Exercise" 1 "💪"
-at topic add learning "Learn Something New" 2 "🧠"
+att topic add dsa "DSA Practice" 3 "💻"
+att topic add reading "Daily Reading" 1 "📚"
+att topic add workout "Exercise" 1 "💪"
+att topic add learning "Learn Something New" 2 "🧠"
 ```
 
 ### 3. Start Tracking
 
 ```bash
 # Log your activities
-at checkin dsa "Solved binary search problems"
-at checkin reading "Read chapter 5 of Atomic Habits"
-at c workout "30 min cardio"  # 'c' is shorthand for checkin
+att checkin dsa "Solved binary search problems"
+att checkin reading "Read chapter 5 of Atomic Habits"
+att c workout "30 min cardio"  # 'c' is shorthand for checkin
 ```
 
 ### 4. View Your Dashboard
 
 ```bash
-at
+att
 ```
 
 Example output:
@@ -109,32 +109,32 @@ Example output:
 
 ```bash
 # List all topics
-at topic list
+att topic list
 
 # Add a new topic (ID, description, daily goal, emoji)
-at topic add coding "Coding Practice" 2 "⌨️"
+att topic add coding "Coding Practice" 2 "⌨️"
 
 # Pause tracking a topic (without deleting history)
-at topic disable coding
+att topic disable coding
 
 # Resume tracking
-at topic enable coding
+att topic enable coding
 
 # Remove a topic permanently
-at topic remove coding
+att topic remove coding
 ```
 
 ### Configuration
 
 ```bash
 # View current configuration
-at config show
+att config show
 
 # Change data directory
-at config set-path ~/my-tracking-data
+att config set-path ~/my-tracking-data
 
 # Set Git remote for syncing across devices
-at config set-remote git@github.com:yourusername/at-data.git
+att config set-remote git@github.com:yourusername/at-data.git
 ```
 
 ## 💡 Examples
@@ -143,30 +143,30 @@ at config set-remote git@github.com:yourusername/at-data.git
 
 ```bash
 # Morning routine
-at c meditation "10 min mindfulness" 🧘
-at c reading "Read for 20 minutes" 📖
+att c meditation "10 min mindfulness" 🧘
+att c reading "Read for 20 minutes" 📖
 
 # Work tracking
-at c coding "Built user authentication" 💻
-at c learning "Watched Go tutorial" 🎓
+att c coding "Built user authentication" 💻
+att c learning "Watched Go tutorial" 🎓
 
 # Evening routine
-at c workout "Gym session" 💪
-at c journal "Reflected on the day" 📝
+att c workout "Gym session" 💪
+att c journal "Reflected on the day" 📝
 ```
 
 ### Project-Based Tracking
 
 ```bash
 # Add project-specific topics
-at topic add frontend "Frontend Development" 3 "🎨"
-at topic add backend "Backend Development" 3 "⚙️"
-at topic add testing "Write Tests" 2 "🧪"
+att topic add frontend "Frontend Development" 3 "🎨"
+att topic add backend "Backend Development" 3 "⚙️"
+att topic add testing "Write Tests" 2 "🧪"
 
 # Log your work
-at c frontend "Implemented responsive navbar"
-at c backend "Created REST API endpoints"
-at c testing "Added unit tests for auth module"
+att c frontend "Implemented responsive navbar"
+att c backend "Created REST API endpoints"
+att c testing "Added unit tests for auth module"
 ```
 
 ## 🔧 Configuration Files
@@ -179,14 +179,14 @@ at c testing "Added unit tests for auth module"
 {
   "data_path": "/Users/you/.at",
   "git_enabled": true,
-  "git_remote": "git@github.com:yourusername/at-data.git"
+  "git_remote": "git@github.com:yourusername/att-data.git"
 }
 ```
 
 ### Data Directory Structure
 
 ```
-~/.at/
+~/.att/
 ├── topics.json          # Topic definitions
 ├── checkins.json        # All check-in records
 └── .git/               # Git repository (if enabled)
@@ -209,7 +209,7 @@ Keep your progress synced across multiple devices:
 ```bash
 # 1. Create a private GitHub repo for your data
 # 2. Set the remote
-at config set-remote git@github.com:yourusername/at-data.git
+att config set-remote git@github.com:yourusername/at-data.git
 
 # Your check-ins will auto-commit and push!
 ```
@@ -219,9 +219,9 @@ at config set-remote git@github.com:yourusername/at-data.git
 ### Build from Source
 
 ```bash
-git clone https://github.com/skydev-x/at.git
-cd at
-go build -o at .
+git clone https://github.com/skydev-x/att.git
+cd att
+go build -o att .
 ```
 
 ### Run Tests
@@ -252,10 +252,10 @@ A: No! Works completely offline. Git sync is optional.
 A: Currently optimized for macOS and Linux. Windows support coming soon.
 
 **Q: How do I backup my data?**  
-A: Your data is in `~/.at/`. Either enable Git sync or manually backup this directory.
+A: Your data is in `~/.att/`. Either enable Git sync or manually backup this directory.
 
 **Q: Can I edit past check-ins?**  
-A: Currently, you can manually edit `~/.at/checkins.json`. Built-in editing coming soon.
+A: Currently, you can manually edit `~/.att/checkins.json`. Built-in editing coming soon.
 
 **Q: Is my data private?**  
 A: Yes! Everything is stored locally. Git sync is optional and you control the repository.
@@ -274,9 +274,9 @@ Built with:
 
 ## 📧 Support
 
-- 🐛 **Bug Reports:** [GitHub Issues](https://github.com/skydev-x/at/issues)
-- 💡 **Feature Requests:** [GitHub Discussions](https://github.com/skydev-x/at/discussions)
-- 📖 **Documentation:** [Wiki](https://github.com/skydev-x/at/wiki)
+- 🐛 **Bug Reports:** [GitHub Issues](https://github.com/skydev-x/att/issues)
+- 💡 **Feature Requests:** [GitHub Discussions](https://github.com/skydev-x/att/discussions)
+- 📖 **Documentation:** [Wiki](https://github.com/skydev-x/att/wiki)
 
 ---
 

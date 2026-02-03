@@ -126,7 +126,7 @@ func main() {
 	switch command {
 	case "checkin", "c":
 		if len(os.Args) < 4 {
-			fmt.Println("Usage: at checkin <topic> <remark>")
+			fmt.Println("Usage: att checkin <topic> <remark>")
 			os.Exit(1)
 		}
 		checkin(os.Args[2], strings.Join(os.Args[3:], " "))
@@ -142,19 +142,19 @@ func main() {
 		fmt.Println(VERSION)
 	default:
 		fmt.Printf("Unknown command: %s\n", command)
-		fmt.Println("Run 'at help' for usage")
+		fmt.Println("Run 'att help' for usage")
 		os.Exit(1)
 	}
 }
 
 func getConfigPath() string {
 	home, _ := os.UserHomeDir()
-	return filepath.Join(home, ".at_config.json")
+	return filepath.Join(home, ".att_config.json")
 }
 
 func getDefaultDataPath() string {
 	home, _ := os.UserHomeDir()
-	return filepath.Join(home, ".at")
+	return filepath.Join(home, ".att")
 }
 
 func loadConfig() *Config {
@@ -322,7 +322,7 @@ func getTodayProgress(data *ProgressData, topicID string) int {
 func NewDashboard() *Dashboard {
 	cfg := loadConfig()
 	if cfg == nil {
-		return &Dashboard{err: fmt.Errorf("no configuration found - run 'at setup' first")}
+		return &Dashboard{err: fmt.Errorf("no configuration found - run 'att setup' first")}
 	}
 
 	initRepo(cfg)
@@ -362,7 +362,7 @@ func (d *Dashboard) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 func (d *Dashboard) View() string {
 	if d.err != nil {
-		return errorBoxStyle.Render(fmt.Sprintf("Error: %v\n\nRun 'at setup' to get started.", d.err))
+		return errorBoxStyle.Render(fmt.Sprintf("Error: %v\n\nRun 'att setup' to get started.", d.err))
 	}
 
 	contentWidth := d.width - 8
@@ -388,7 +388,7 @@ func (d *Dashboard) View() string {
 			Foreground(mutedColor).
 			Italic(true).
 			MarginTop(1).
-			Render("No topics configured. Run 'at topic add' to create your first topic.")
+			Render("No topics configured. Run 'att topic add' to create your first topic.")
 		sections = append(sections, "", noTopics)
 	} else {
 		// Show topics
@@ -475,7 +475,7 @@ func (d *Dashboard) View() string {
 
 	// Footer
 	footer := footerStyle.Width(contentWidth).
-		Render("Press 'q' to quit • 'at help' for commands")
+		Render("Press 'q' to quit • 'att help' for commands")
 	sections = append(sections, "", footer)
 
 	content := lipgloss.JoinVertical(lipgloss.Left, sections...)
@@ -494,7 +494,7 @@ func showDashboard() {
 func checkin(topicID, remark string) {
 	cfg := loadConfig()
 	if cfg == nil {
-		fmt.Println("No configuration found. Run 'at setup' first.")
+		fmt.Println("No configuration found. Run 'att setup' first.")
 		os.Exit(1)
 	}
 
@@ -513,7 +513,7 @@ func checkin(topicID, remark string) {
 	}
 
 	if !topicCfg.Enabled {
-		fmt.Printf("Topic '%s' is disabled. Enable it with: at topic enable %s\n", topicID, topicID)
+		fmt.Printf("Topic '%s' is disabled. Enable it with: att topic enable %s\n", topicID, topicID)
 		os.Exit(1)
 	}
 
@@ -630,7 +630,7 @@ func showCheckinSuccess(cfg *TopicConfig, data *TopicData, progress int, remark 
 // Topic management
 func handleTopicCommand() {
 	if len(os.Args) < 3 {
-		fmt.Println("Usage: at topic <command> [args]")
+		fmt.Println("Usage: att topic <command> [args]")
 		fmt.Println("\nCommands:")
 		fmt.Println("  add <id> <n> <goal> [emoji]  - Add new topic")
 		fmt.Println("  remove <id>                   - Remove topic")
@@ -661,11 +661,11 @@ func handleTopicCommand() {
 
 func topicAdd() {
 	if len(os.Args) < 6 {
-		fmt.Println("Usage: at topic add <id> <n> <goal> [emoji]")
+		fmt.Println("Usage: att topic add <id> <n> <goal> [emoji]")
 		fmt.Println("\nExamples:")
-		fmt.Println("  at topic add dsa 'DSA Practice' 3 '💻'")
-		fmt.Println("  at topic add reading 'Daily Reading' 1 '📚'")
-		fmt.Println("  at topic add exercise 'Exercise' 1 '💪'")
+		fmt.Println("  att topic add dsa 'DSA Practice' 3 '💻'")
+		fmt.Println("  att topic add reading 'Daily Reading' 1 '📚'")
+		fmt.Println("  att topic add exercise 'Exercise' 1 '💪'")
 		os.Exit(1)
 	}
 
@@ -722,7 +722,7 @@ func topicAdd() {
 
 func topicRemove() {
 	if len(os.Args) < 4 {
-		fmt.Println("Usage: at topic remove <id>")
+		fmt.Println("Usage: att topic remove <id>")
 		os.Exit(1)
 	}
 
@@ -770,7 +770,7 @@ func topicEnable(enable bool) {
 		if !enable {
 			action = "disable"
 		}
-		fmt.Printf("Usage: at topic %s <id>\n", action)
+		fmt.Printf("Usage: att topic %s <id>\n", action)
 		os.Exit(1)
 	}
 
@@ -810,7 +810,7 @@ func topicList() {
 
 	if len(cfg.Topics) == 0 {
 		fmt.Println("No topics configured")
-		fmt.Println("\nAdd a topic with: at topic add <id> <n> <goal> [emoji]")
+		fmt.Println("\nAdd a topic with: att topic add <id> <n> <goal> [emoji]")
 		return
 	}
 
@@ -835,7 +835,7 @@ func topicList() {
 // Config management
 func handleConfigCommand() {
 	if len(os.Args) < 3 {
-		fmt.Println("Usage: at config <command>")
+		fmt.Println("Usage: att config <command>")
 		fmt.Println("\nCommands:")
 		fmt.Println("  show              - Show current configuration")
 		fmt.Println("  set-path <path>   - Set data directory path")
@@ -861,7 +861,7 @@ func handleConfigCommand() {
 func configShow() {
 	cfg := loadConfig()
 	if cfg == nil {
-		fmt.Println("No configuration found. Run 'at setup' to create one.")
+		fmt.Println("No configuration found. Run 'att setup' to create one.")
 		return
 	}
 
@@ -898,8 +898,8 @@ func configSetPath() {
 	if len(os.Args) < 4 {
 		fmt.Println("Usage: at config set-path <path>")
 		fmt.Println("\nExamples:")
-		fmt.Println("  at config set-path ~/.at")
-		fmt.Println("  at config set-path ~/Documents/tracking")
+		fmt.Println("  att config set-path ~/.att")
+		fmt.Println("  att config set-path ~/Documents/tracking")
 		os.Exit(1)
 	}
 
@@ -927,10 +927,10 @@ func configSetPath() {
 
 func configSetRemote() {
 	if len(os.Args) < 4 {
-		fmt.Println("Usage: at config set-remote <url>")
+		fmt.Println("Usage: att config set-remote <url>")
 		fmt.Println("\nExamples:")
-		fmt.Println("  at config set-remote git@github.com:user/tracking.git")
-		fmt.Println("  at config set-remote ''  (to remove)")
+		fmt.Println("  att config set-remote git@github.com:user/tracking.git")
+		fmt.Println("  att config set-remote ''  (to remove)")
 		os.Exit(1)
 	}
 
@@ -938,7 +938,7 @@ func configSetRemote() {
 
 	cfg := loadConfig()
 	if cfg == nil {
-		fmt.Println("No configuration found. Run 'at setup' first.")
+		fmt.Println("No configuration found. Run 'att setup' first.")
 		os.Exit(1)
 	}
 
@@ -1011,65 +1011,65 @@ func runSetup() {
 		fmt.Println("No topics configured yet. Add your first topic:")
 		fmt.Println()
 		fmt.Println("Examples:")
-		fmt.Println("  at topic add dsa 'DSA Practice' 3 '💻'")
-		fmt.Println("  at topic add reading 'Daily Reading' 1 '📚'")
-		fmt.Println("  at topic add exercise 'Exercise' 1 '💪'")
-		fmt.Println("  at topic add coding 'Coding Projects' 2 '⌨️'")
+		fmt.Println("  att topic add dsa 'DSA Practice' 3 '💻'")
+		fmt.Println("  att topic add reading 'Daily Reading' 1 '📚'")
+		fmt.Println("  att topic add exercise 'Exercise' 1 '💪'")
+		fmt.Println("  att topic add coding 'Coding Projects' 2 '⌨️'")
 		fmt.Println()
 	} else {
-		fmt.Println("Run 'at' to see your dashboard")
+		fmt.Println("Run 'att' to see your dashboard")
 	}
 }
 
 func showHelp() {
 	help := `
-AT - Activity Tracker
+AHDHD - Tracker Tool
 
 A Git-backed progress tracker for your daily goals.
 
 USAGE:
-  at                                  Show dashboard
-  at checkin <topic> <remark>         Record a check-in
-  at topic <command> [args]           Manage topics
-  at config <command> [args]          Manage configuration
-  at setup                            Run setup wizard
-  at help                             Show this help
+  att                                  Show dashboard
+  att checkin <topic> <remark>         Record a check-in
+  att topic <command> [args]           Manage topics
+  att config <command> [args]          Manage configuration
+  att setup                            Run setup wizard
+  att help                             Show this help
 
 TOPIC COMMANDS:
-  at topic add <id> <n> <goal> [emoji]   Add new topic
-  at topic remove <id>                    Remove topic
-  at topic enable <id>                    Enable topic
-  at topic disable <id>                   Disable topic (pause tracking)
-  at topic list                           List all topics
+  att topic add <id> <n> <goal> [emoji]   Add new topic
+  att topic remove <id>                    Remove topic
+  att topic enable <id>                    Enable topic
+  att topic disable <id>                   Disable topic (pause tracking)
+  att topic list                           List all topics
 
 CONFIG COMMANDS:
-  at config show                      Show configuration
-  at config set-path <path>           Set data directory
-  at config set-remote <url>          Set Git remote URL
+  att config show                      Show configuration
+  att config set-path <path>           Set data directory
+  att config set-remote <url>          Set Git remote URL
 
 EXAMPLES:
   # Add topics
-  at topic add dsa 'DSA Practice' 3 '💻'
-  at topic add reading 'Daily Reading' 1 '📚'
+  att topic add dsa 'DSA Practice' 3 '💻'
+  att topic add reading 'Daily Reading' 1 '📚'
 
   # Check in
-  at checkin dsa "Solved two sum problem"
-  at c reading "Read 30 pages"  # 'c' is short for checkin
+  att checkin dsa "Solved two sum problem"
+  att c reading "Read 30 pages"  # 'c' is short for checkin
 
   # Manage topics
-  at topic disable dsa              # Pause tracking
-  at topic enable dsa               # Resume tracking
-  at topic remove old-topic         # Delete topic
+  att topic disable dsa              # Pause tracking
+  att topic enable dsa               # Resume tracking
+  att topic remove old-topic         # Delete topic
 
   # Configuration
-  at config show                    # View settings
-  at config set-path ~/tracking     # Change data location
-  at config set-remote git@...      # Set Git remote
+  att config show                    # View settings
+  att config set-path ~/tracking     # Change data location
+  att config set-remote git@...      # Set Git remote
 
 FILES:
-  Config:  ~/.at_config.json
-  Data:    ~/.at/ (or custom path)
+  Config:  ~/.att_config.json
+  Data:    ~/.att/ (or custom path)
 
-For more info, visit: (https://github.com/skydev-x/at)`
+For more info, visit: (https://github.com/skydev-x/att)`
 	fmt.Println(help)
 }
