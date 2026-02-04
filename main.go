@@ -11,63 +11,54 @@ import (
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-)
 
-// Colors
-var (
-	primaryColor = lipgloss.Color("#7C3AED")
-	successColor = lipgloss.Color("#10B981")
-	warningColor = lipgloss.Color("#F59E0B")
-	dangerColor  = lipgloss.Color("#EF4444")
-	mutedColor   = lipgloss.Color("#6B7280")
-	textColor    = lipgloss.Color("#F3F4F6")
-	borderColor  = lipgloss.Color("#374151")
+	"att/ui"
 )
 
 // Styles
 var (
 	titleStyle = lipgloss.NewStyle().
-			Foreground(primaryColor).
+			Foreground(ui.PrimaryColor).
 			Bold(true).
 			Padding(0, 1)
 
 	subtitleStyle = lipgloss.NewStyle().
-			Foreground(mutedColor).
+			Foreground(ui.MutedColor).
 			Italic(true).
 			PaddingLeft(1)
 
 	topicStyle = lipgloss.NewStyle().
-			Foreground(textColor).
+			Foreground(ui.TextColor).
 			Bold(true).
 			MarginTop(1)
 
 	disabledStyle = lipgloss.NewStyle().
-			Foreground(mutedColor).
+			Foreground(ui.MutedColor).
 			Strikethrough(true)
 
 	statsStyle = lipgloss.NewStyle().
-			Foreground(mutedColor).
+			Foreground(ui.MutedColor).
 			PaddingLeft(2)
 
 	borderStyle = lipgloss.NewStyle().
 			BorderStyle(lipgloss.RoundedBorder()).
-			BorderForeground(borderColor).
+			BorderForeground(ui.BorderColor).
 			Padding(1, 2)
 
 	footerStyle = lipgloss.NewStyle().
-			Foreground(mutedColor).
+			Foreground(ui.MutedColor).
 			Italic(true).
 			Align(lipgloss.Center).
 			MarginTop(1)
 
 	successBoxStyle = lipgloss.NewStyle().
 			Border(lipgloss.RoundedBorder()).
-			BorderForeground(successColor).
+			BorderForeground(ui.SuccessColor).
 			Padding(1, 2)
 
 	errorBoxStyle = lipgloss.NewStyle().
 			Border(lipgloss.RoundedBorder()).
-			BorderForeground(dangerColor).
+			BorderForeground(ui.DangerColor).
 			Padding(1, 2)
 )
 

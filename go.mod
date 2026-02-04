@@ -1,4 +1,4 @@
-module adhd-tracker
+module att
 
 go 1.24.0
 
