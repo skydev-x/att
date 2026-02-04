@@ -266,4 +266,6 @@ Built with:
 
 **Made with ❤️ by [@skydev-x](https://github.com/skydev-x)**
 
-⭐ If you find this helpful, please star the repo!
+⭐ If you find this helpful, please star the repo! or support open source work
+
+<iframe src="https://github.com/sponsors/skydev-x/button" title="Sponsor skydev-x" height="32" width="114" style="border: 0; border-radius: 6px;"></iframe>
