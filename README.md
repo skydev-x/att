@@ -207,12 +207,12 @@ go test ./...
 
 ### TODOs
 
--[] Improve config and git sync
--[] Improve viewing of trackings
--[] Improve data storage from json file to efficient alternative.
--[] New commands to view graphs
--[] Structure app for better Development
--[] add custom styling and layouts
+- [ ] Improve config and git sync
+- [ ] Improve viewing of trackings
+- [ ] Improve data storage from JSON file to an efficient alternative
+- [ ] New commands to view graphs
+- [ ] Structure app for better development
+- [ ] Add custom styling and layouts
 
 ### Contributing
 
