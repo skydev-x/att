@@ -130,7 +130,7 @@ func main() {
 			os.Exit(1)
 		}
 		checkin(os.Args[2], strings.Join(os.Args[3:], " "))
-	case "topic":
+	case "topic", "t":
 		handleTopicCommand()
 	case "config":
 		handleConfigCommand()
@@ -149,7 +149,7 @@ func main() {
 
 func getConfigPath() string {
 	home, _ := os.UserHomeDir()
-	return filepath.Join(home, ".att_config.json")
+	return filepath.Join(home, ".att/config.json")
 }
 
 func getDefaultDataPath() string {
@@ -365,13 +365,13 @@ func (d *Dashboard) View() string {
 		return errorBoxStyle.Render(fmt.Sprintf("Error: %v\n\nRun 'att setup' to get started.", d.err))
 	}
 
-	contentWidth := d.width - 8
+	contentWidth := d.width
 	if contentWidth < 40 {
 		contentWidth = 40
 	}
 
 	// Title
-	title := titleStyle.Render("🚀 Activity Tracker")
+	title := titleStyle.Render("🚀 ATT")
 	subtitle := subtitleStyle.Render(" Dashboard")
 
 	// Separator
@@ -643,7 +643,7 @@ func handleTopicCommand() {
 	subCmd := os.Args[2]
 
 	switch subCmd {
-	case "add":
+	case "add", "+":
 		topicAdd()
 	case "remove", "rm", "delete":
 		topicRemove()
@@ -665,7 +665,7 @@ func topicAdd() {
 		fmt.Println("\nExamples:")
 		fmt.Println("  att topic add dsa 'DSA Practice' 3 '💻'")
 		fmt.Println("  att topic add reading 'Daily Reading' 1 '📚'")
-		fmt.Println("  att topic add exercise 'Exercise' 1 '💪'")
+		fmt.Println("  att t + exercise 'Exercise' 1 '💪'")
 		os.Exit(1)
 	}
 
