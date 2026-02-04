@@ -367,7 +367,7 @@ func (d *Dashboard) View() string {
 
 	// Separator
 	separator := lipgloss.NewStyle().
-		Foreground(borderColor).
+		Foreground(ui.BorderColor).
 		Render(strings.Repeat("─", contentWidth))
 
 	var sections []string
@@ -376,7 +376,7 @@ func (d *Dashboard) View() string {
 	// Check if no topics
 	if len(d.cfg.Topics) == 0 {
 		noTopics := lipgloss.NewStyle().
-			Foreground(mutedColor).
+			Foreground(ui.MutedColor).
 			Italic(true).
 			MarginTop(1).
 			Render("No topics configured. Run 'att topic add' to create your first topic.")
@@ -415,7 +415,7 @@ func (d *Dashboard) View() string {
 			progressText := ""
 			if todayProgress >= dailyGoal {
 				progressText = lipgloss.NewStyle().
-					Foreground(successColor).
+					Foreground(ui.SuccessColor).
 					Render(fmt.Sprintf("  Today: %d/%d [%s] ✓ GOAL MET!", todayProgress, dailyGoal, progressBar))
 			} else {
 				progressText = statsStyle.Render(fmt.Sprintf("  Today: %d/%d [%s]", todayProgress, dailyGoal, progressBar))
@@ -425,7 +425,7 @@ func (d *Dashboard) View() string {
 			streakText := ""
 			if topicData.Streak > 0 {
 				streakText = statsStyle.Render("  Streak: ") +
-					lipgloss.NewStyle().Foreground(warningColor).Bold(true).
+					lipgloss.NewStyle().Foreground(ui.WarningColor).Bold(true).
 						Render(fmt.Sprintf("%d days 🔥", topicData.Streak))
 			} else {
 				streakText = statsStyle.Render("  Streak: 0 days (start today!)")
@@ -451,7 +451,7 @@ func (d *Dashboard) View() string {
 					entryTime, _ := time.Parse(time.RFC3339, ci.Date)
 					timeStr := entryTime.Format("15:04")
 					checkInsText += lipgloss.NewStyle().
-						Foreground(mutedColor).
+						Foreground(ui.MutedColor).
 						PaddingLeft(4).
 						Render(fmt.Sprintf("[%s] %s\n", timeStr, ci.Remark))
 				}
@@ -565,18 +565,18 @@ func checkin(topicID, remark string) {
 
 func showCheckinSuccess(cfg *TopicConfig, data *TopicData, progress int, remark string) {
 	title := lipgloss.NewStyle().
-		Foreground(successColor).
+		Foreground(ui.SuccessColor).
 		Bold(true).
 		Render("✓ Check-in Recorded!")
 
 	topicLine := lipgloss.NewStyle().
-		Foreground(textColor).
+		Foreground(ui.TextColor).
 		Bold(true).
 		MarginTop(1).
 		Render(fmt.Sprintf("%s %s", cfg.Emoji, cfg.Name))
 
 	remarkLine := lipgloss.NewStyle().
-		Foreground(mutedColor).
+		Foreground(ui.MutedColor).
 		Italic(true).
 		Render(fmt.Sprintf("\"%s\"", remark))
 
@@ -592,14 +592,14 @@ func showCheckinSuccess(cfg *TopicConfig, data *TopicData, progress int, remark 
 	progressLine := ""
 	if progress >= cfg.DailyGoal {
 		progressLine = lipgloss.NewStyle().
-			Foreground(successColor).
+			Foreground(ui.SuccessColor).
 			Render(fmt.Sprintf("Progress: %d/%d [%s] 🎉", progress, cfg.DailyGoal, progressBar))
 	} else {
 		progressLine = fmt.Sprintf("Progress: %d/%d [%s]", progress, cfg.DailyGoal, progressBar)
 	}
 
 	streakLine := lipgloss.NewStyle().
-		Foreground(warningColor).
+		Foreground(ui.WarningColor).
 		Bold(true).
 		Render(fmt.Sprintf("Streak: %d days 🔥", data.Streak))
 
@@ -810,10 +810,10 @@ func topicList() {
 
 	for id, topic := range cfg.Topics {
 		status := "✓"
-		statusColor := successColor
+		statusColor := ui.SuccessColor
 		if !topic.Enabled {
 			status = "✗"
-			statusColor = dangerColor
+			statusColor = ui.DangerColor
 		}
 
 		statusText := lipgloss.NewStyle().Foreground(statusColor).Render(status)
