@@ -12,22 +12,9 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 
+	"att/model"
 	"att/ui"
 )
-
-// Config structures
-type TopicConfig struct {
-	Name      string `json:"name"`
-	DailyGoal int    `json:"daily_goal"`
-	Emoji     string `json:"emoji"`
-	Enabled   bool   `json:"enabled"`
-}
-
-type Config struct {
-	DataPath string                  `json:"data_path"`
-	SSHURL   string                  `json:"ssh_url,omitempty"`
-	Topics   map[string]*TopicConfig `json:"topics"`
-}
 
 // Data structures
 type CheckIn struct {
@@ -50,7 +37,7 @@ type ProgressData struct {
 
 // Dashboard model
 type Dashboard struct {
-	cfg    *Config
+	cfg    *model.Config
 	data   *ProgressData
 	width  int
 	height int
@@ -101,7 +88,7 @@ func getDefaultDataPath() string {
 	return filepath.Join(home, ".att")
 }
 
-func loadConfig() *Config {
+func loadConfig() *model.Config {
 	configPath := getConfigPath()
 
 	if _, err := os.Stat(configPath); os.IsNotExist(err) {
@@ -115,7 +102,7 @@ func loadConfig() *Config {
 		os.Exit(1)
 	}
 
-	var cfg Config
+	var cfg model.Config
 	if err := json.Unmarshal(data, &cfg); err != nil {
 		fmt.Printf("Error parsing config: %v\n", err)
 		os.Exit(1)
@@ -123,13 +110,13 @@ func loadConfig() *Config {
 
 	// Initialize topics map if nil
 	if cfg.Topics == nil {
-		cfg.Topics = make(map[string]*TopicConfig)
+		cfg.Topics = make(map[string]*model.TopicConfig)
 	}
 
 	return &cfg
 }
 
-func saveConfig(cfg *Config) {
+func saveConfig(cfg *model.Config) {
 	data, err := json.MarshalIndent(cfg, "", "  ")
 	if err != nil {
 		fmt.Printf("Error saving config: %v\n", err)
@@ -149,7 +136,7 @@ func runGit(repoPath string, args ...string) error {
 	return cmd.Run()
 }
 
-func initRepo(cfg *Config) {
+func initRepo(cfg *model.Config) {
 	dataPath := cfg.DataPath
 	os.MkdirAll(dataPath, 0755)
 
@@ -516,7 +503,7 @@ func checkin(topicID, remark string) {
 	showCheckinSuccess(topicCfg, topicData, currentProgress, remark)
 }
 
-func showCheckinSuccess(cfg *TopicConfig, data *TopicData, progress int, remark string) {
+func showCheckinSuccess(cfg *model.TopicConfig, data *TopicData, progress int, remark string) {
 	title := lipgloss.NewStyle().
 		Foreground(ui.SuccessColor).
 		Bold(true).
@@ -625,9 +612,9 @@ func topicAdd() {
 
 	cfg := loadConfig()
 	if cfg == nil {
-		cfg = &Config{
+		cfg = &model.Config{
 			DataPath: getDefaultDataPath(),
-			Topics:   make(map[string]*TopicConfig),
+			Topics:   make(map[string]*model.TopicConfig),
 		}
 	}
 
@@ -636,7 +623,7 @@ func topicAdd() {
 		os.Exit(1)
 	}
 
-	cfg.Topics[topicID] = &TopicConfig{
+	cfg.Topics[topicID] = &model.TopicConfig{
 		Name:      name,
 		DailyGoal: dailyGoal,
 		Emoji:     emoji,
@@ -857,9 +844,9 @@ func configSetPath() {
 
 	cfg := loadConfig()
 	if cfg == nil {
-		cfg = &Config{
+		cfg = &model.Config{
 			DataPath: newPath,
-			Topics:   make(map[string]*TopicConfig),
+			Topics:   make(map[string]*model.TopicConfig),
 		}
 	} else {
 		cfg.DataPath = newPath
@@ -911,9 +898,9 @@ func runSetup() {
 
 	cfg := loadConfig()
 	if cfg == nil {
-		cfg = &Config{
+		cfg = &model.Config{
 			DataPath: getDefaultDataPath(),
-			Topics:   make(map[string]*TopicConfig),
+			Topics:   make(map[string]*model.TopicConfig),
 		}
 	}
 
