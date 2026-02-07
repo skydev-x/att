@@ -15,53 +15,6 @@ import (
 	"att/ui"
 )
 
-// Styles
-var (
-	titleStyle = lipgloss.NewStyle().
-			Foreground(ui.PrimaryColor).
-			Bold(true).
-			Padding(0, 1)
-
-	subtitleStyle = lipgloss.NewStyle().
-			Foreground(ui.MutedColor).
-			Italic(true).
-			PaddingLeft(1)
-
-	topicStyle = lipgloss.NewStyle().
-			Foreground(ui.TextColor).
-			Bold(true).
-			MarginTop(1)
-
-	disabledStyle = lipgloss.NewStyle().
-			Foreground(ui.MutedColor).
-			Strikethrough(true)
-
-	statsStyle = lipgloss.NewStyle().
-			Foreground(ui.MutedColor).
-			PaddingLeft(2)
-
-	borderStyle = lipgloss.NewStyle().
-			BorderStyle(lipgloss.RoundedBorder()).
-			BorderForeground(ui.BorderColor).
-			Padding(1, 2)
-
-	footerStyle = lipgloss.NewStyle().
-			Foreground(ui.MutedColor).
-			Italic(true).
-			Align(lipgloss.Center).
-			MarginTop(1)
-
-	successBoxStyle = lipgloss.NewStyle().
-			Border(lipgloss.RoundedBorder()).
-			BorderForeground(ui.SuccessColor).
-			Padding(1, 2)
-
-	errorBoxStyle = lipgloss.NewStyle().
-			Border(lipgloss.RoundedBorder()).
-			BorderForeground(ui.DangerColor).
-			Padding(1, 2)
-)
-
 // Config structures
 type TopicConfig struct {
 	Name      string `json:"name"`
@@ -353,7 +306,7 @@ func (d *Dashboard) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 func (d *Dashboard) View() string {
 	if d.err != nil {
-		return errorBoxStyle.Render(fmt.Sprintf("Error: %v\n\nRun 'att setup' to get started.", d.err))
+		return ui.ErrorBoxStyle.Render(fmt.Sprintf("Error: %v\n\nRun 'att setup' to get started.", d.err))
 	}
 
 	contentWidth := d.width
@@ -362,8 +315,8 @@ func (d *Dashboard) View() string {
 	}
 
 	// Title
-	title := titleStyle.Render("🚀 ATT")
-	subtitle := subtitleStyle.Render(" Dashboard")
+	title := ui.TitleStyle.Render("🚀 ATT")
+	subtitle := ui.SubtitleStyle.Render(" Dashboard")
 
 	// Separator
 	separator := lipgloss.NewStyle().
@@ -391,13 +344,13 @@ func (d *Dashboard) View() string {
 
 			// Skip disabled topics
 			if !topicCfg.Enabled {
-				disabledText := disabledStyle.Render(fmt.Sprintf("%s %s (disabled)", topicCfg.Emoji, topicCfg.Name))
+				disabledText := ui.DisabledStyle.Render(fmt.Sprintf("%s %s (disabled)", topicCfg.Emoji, topicCfg.Name))
 				sections = append(sections, "", disabledText)
 				continue
 			}
 
 			// Topic header
-			topicHeader := topicStyle.Render(fmt.Sprintf("%s %s", topicCfg.Emoji, topicCfg.Name))
+			topicHeader := ui.TopicStyle.Render(fmt.Sprintf("%s %s", topicCfg.Emoji, topicCfg.Name))
 
 			// Progress
 			todayProgress := getTodayProgress(d.data, topicID)
@@ -418,21 +371,21 @@ func (d *Dashboard) View() string {
 					Foreground(ui.SuccessColor).
 					Render(fmt.Sprintf("  Today: %d/%d [%s] ✓ GOAL MET!", todayProgress, dailyGoal, progressBar))
 			} else {
-				progressText = statsStyle.Render(fmt.Sprintf("  Today: %d/%d [%s]", todayProgress, dailyGoal, progressBar))
+				progressText = ui.StatsStyle.Render(fmt.Sprintf("  Today: %d/%d [%s]", todayProgress, dailyGoal, progressBar))
 			}
 
 			// Streak
 			streakText := ""
 			if topicData.Streak > 0 {
-				streakText = statsStyle.Render("  Streak: ") +
+				streakText = ui.StatsStyle.Render("  Streak: ") +
 					lipgloss.NewStyle().Foreground(ui.WarningColor).Bold(true).
 						Render(fmt.Sprintf("%d days 🔥", topicData.Streak))
 			} else {
-				streakText = statsStyle.Render("  Streak: 0 days (start today!)")
+				streakText = ui.StatsStyle.Render("  Streak: 0 days (start today!)")
 			}
 
 			// Total
-			totalText := statsStyle.Render(fmt.Sprintf("  Total: %d check-ins", topicData.TotalCheckIns))
+			totalText := ui.StatsStyle.Render(fmt.Sprintf("  Total: %d check-ins", topicData.TotalCheckIns))
 
 			// Today's check-ins
 			today := time.Now().Truncate(24 * time.Hour)
@@ -446,7 +399,7 @@ func (d *Dashboard) View() string {
 
 			checkInsText := ""
 			if len(todayEntries) > 0 {
-				checkInsText = statsStyle.Render("  Today's work:") + "\n"
+				checkInsText = ui.StatsStyle.Render("  Today's work:") + "\n"
 				for _, ci := range todayEntries {
 					entryTime, _ := time.Parse(time.RFC3339, ci.Date)
 					timeStr := entryTime.Format("15:04")
@@ -465,12 +418,12 @@ func (d *Dashboard) View() string {
 	}
 
 	// Footer
-	footer := footerStyle.Width(contentWidth).
+	footer := ui.FooterStyle.Width(contentWidth).
 		Render("Press 'q' to quit • 'att help' for commands")
 	sections = append(sections, "", footer)
 
 	content := lipgloss.JoinVertical(lipgloss.Left, sections...)
-	return borderStyle.Width(contentWidth).Render(content)
+	return ui.BorderStyle.Width(contentWidth).Render(content)
 }
 
 func showDashboard() {
@@ -614,7 +567,7 @@ func showCheckinSuccess(cfg *TopicConfig, data *TopicData, progress int, remark 
 	)
 
 	fmt.Println()
-	fmt.Println(successBoxStyle.Render(content))
+	fmt.Println(ui.SuccessBoxStyle.Render(content))
 	fmt.Println()
 }
 
