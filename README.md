@@ -1,6 +1,6 @@
 # att 🎯
 
-Accidentally Doing Hundred Different-things (ADHD) Tracker Tool; aka `att`
+Accidentally Doing Hundred Different-things Tracker Tool; aka `att`
 
 > A simple, Git-backed progress tracker for your daily goals. Track habits, monitor streaks, and stay accountable—all from your terminal.
 
@@ -62,7 +62,7 @@ This will guide you through:
 att topic add dsa "DSA Practice" 3 "💻"
 att topic add reading "Daily Reading" 1 "📚"
 att topic add workout "Exercise" 1 "💪"
-att topic add learning "Learn Something New" 2 "🧠"
+att topic + learning "Learn Something New" 2 "🧠"
 ```
 
 ### 3. Start Tracking
